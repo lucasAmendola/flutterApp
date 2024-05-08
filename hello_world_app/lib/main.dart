@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget{
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
-          colorSchemeSeed: Colors.redAccent
+          colorSchemeSeed: Color.fromARGB(255, 247, 202, 0)
         ),
         home: const CounterFunctionsScreen()  
       );
