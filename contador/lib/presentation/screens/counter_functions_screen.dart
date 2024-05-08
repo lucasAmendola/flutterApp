@@ -17,6 +17,8 @@ class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
   @override
   Widget build(BuildContext context) {
 
+    final currentWidth = MediaQuery.of(context).size.width;
+
     // ignore: prefer_const_constructors
     return Scaffold(
       appBar: AppBar(
@@ -40,40 +42,55 @@ class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-            FloatingActionButton(
-                  onPressed: () {
-                    setState(() {
-                      clickCounter++;
-                    });
-                  },
-                  child: Icon(Icons.plus_one),  
-           ),
-
-          const SizedBox(height: 10),
-
-           FloatingActionButton(
-                  onPressed: () {
-                    setState(() {
-                      if(clickCounter > 0){
-                          clickCounter--;
-                        }
-                    });
-                  },
-                  child: Icon(Icons.exposure_minus_1_outlined),  
-           ),
-
-           const SizedBox(height: 10),
-
-           FloatingActionButton(
-                  onPressed: () {
-                    setState(() {
-                          clickCounter = 0;
-                    });
-                  },
-                  child: Icon(Icons.refresh_outlined),  
-           ),
+          CustomButton(
+            icon: Icons.refresh_rounded,
+            onPressed: () {
+              clickCounter = 0;
+              setState(() {});
+            },
+          ),
+          SizedBox(height: 10),
+          CustomButton(
+            icon: Icons.exposure_minus_1_outlined,
+            onPressed: (){
+              setState(() {
+                if(clickCounter > 0){
+                    clickCounter--;
+                   }
+              });
+            },
+            ),
+          SizedBox(height: 10),
+          CustomButton(
+            icon: Icons.plus_one,
+            onPressed: () {
+              setState(() {
+                clickCounter++;
+              });
+            },
+            ),
         ],
       ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+
+final IconData icon;
+final VoidCallback? onPressed;
+
+  const CustomButton({
+    super.key, 
+    required this.icon, 
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+           onPressed: onPressed,
+           child: Icon(icon),  
     );
   }
 }
